@@ -14259,10 +14259,18 @@ Look at the graph at the bottom left from the cell above(the visualization creat
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong></p>
-<p>The algorithm aims to build a strong learner by training and combining weak learners, sequentially. For each weak learner the algorithm penalizes for the missclassified data points adding more weights to them. So, at the first iteration it uses a simple week learner. Then it starts to penalize the weak (ensemble) learner by adding more weights to the miss-classifed/predicted samples. These weights are considered when training the next weak learner and it keeps doing so, until an accurate classifier/predicter is constructed. This accurate classifier/predictor is referred as a strong learner.</p>
+<p>The Adaboost algorithm aims to build a strong learner by training and combining weak learners, sequentially. A weak learner does not rely on guessing, even if its metrics are low. For each weak learner the algorithm penalizes for the missclassified data points adding more weights to them. So, at the first iteration it uses a simple week learner based on a subset of the feature space. Then it starts improve miss-predicted/classified samples of this weak learner when it comes to training the next weak learner. This is for the sake of having a way more better learner. It keeps doing so until an accurate classifier/predictor is constructed. This accurate classifier/predictor is referred as a strong learner.\</p>
+<p>This Adaboost uses decision trees as the week learners by default. Decision trees haven been described earlierly in this notebook (please, scroll up for finding their explanation). The main reasons behind using decision as the weak learners are the follows:</p>
+<ul>
+<li>They do not require hyper parameter searching unlike other models, such as the KNN and SVM.</li>
+<li>They are fast to train, which is needed for such dataset with huge number of samples and too many features. </li>
+<li>The bias and variance dilemma can be trivially addressed by controlling the depth.</li>
+</ul>
 <p><strong><em>References:</em></strong></p>
 
-<pre><code>1. https://blog.paperspace.com/adaboost-optimizer/</code></pre>
+<pre><code>1. https://blog.paperspace.com/adaboost-optimizer/
+2. https://stats.stackexchange.com/questions/124628/why-adaboost-with-decision-trees
+3. https://medium.com/@toprak.mhmt/gradient-boosting-and-weak-learners-1f93726b6fbd</code></pre>
 
 </div>
 </div>
@@ -14464,6 +14472,7 @@ Final F-score on the testing data: 0.7517
 <th style="text-align:center">Metric</th>
 <th style="text-align:center">Unoptimized Model</th>
 <th style="text-align:center">Optimized Model</th>
+<th style="text-align:center">Naive Predictor</th>
 </tr>
 </thead>
 <tbody>
@@ -14471,11 +14480,13 @@ Final F-score on the testing data: 0.7517
 <td style="text-align:center">Accuracy Score</td>
 <td style="text-align:center">0.85</td>
 <td style="text-align:center">0.86</td>
+<td style="text-align:center">0.2478</td>
 </tr>
 <tr>
 <td style="text-align:center">F-score</td>
 <td style="text-align:center">0.72</td>
 <td style="text-align:center">0.74</td>
+<td style="text-align:center">0.2917</td>
 </tr>
 </tbody>
 </table>
@@ -14756,7 +14767,7 @@ F-score on testing data: 0.7432
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">sklearn</span><span class="o">,</span> <span class="nn">IPython</span>
@@ -14779,11 +14790,24 @@ F-score on testing data: 0.7432
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>3.7.6 | packaged by conda-forge | (default, Mar 23 2020, 23:03:20) 
-[GCC 7.3.0]
+<pre>3.7.3 (default, Apr 24 2019, 15:29:51) [MSC v.1915 64 bit (AMD64)]
 0.23.2
 </pre>
 </div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[2]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;[NbConvertApp] Converting notebook finding_donors.ipynb to html&#39;,
+ &#39;[NbConvertApp] Writing 510088 bytes to finding_donors.html&#39;]</pre>
+</div>
+
 </div>
 
 </div>
